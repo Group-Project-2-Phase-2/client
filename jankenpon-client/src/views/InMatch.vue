@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="jumbotron">
-      <h1 class="display-3">Let's begin (USERNAME)</h1>
+      <h1 class="display-3">Let's begin, (USERNAME)!</h1>
       <Billboard></Billboard>
       <Cards></Cards>
     </div>

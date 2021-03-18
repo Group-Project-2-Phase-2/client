@@ -1,7 +1,10 @@
 <template>
   <div class="billboard">
     <h1 class="display-5">time left : {{startValue}} s</h1>
-    <h1 class="display-5">Your score : {{score}}</h1>
+    <div id="score">
+      <h1 class="display-5">Your score : {{userScore1}}</h1>
+      <h1 class="display-5">Enemy score : {{userScore2}}</h1>
+    </div>
   </div>
 </template>
 
@@ -29,7 +32,8 @@ export default {
     this.countDownTimer()
   },
   computed: {
-    ...mapState(['score'])
+    ...mapState(['userScore1']),
+    ...mapState(['userScore2'])
   }
 }
 </script>
