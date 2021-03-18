@@ -4,10 +4,13 @@
     <img src="../assets/gunting.png" alt="shears-picture" class="match-img" @click.prevent="chooseCard('Shears')">
     <img src="../assets/kertas.png" alt="paper-picture" class="match-img" @click.prevent="chooseCard('Paper')">
     <hr class="my-4">
-    <h1 class="display-5">{{"userCard1"}}</h1>
-    <p class="lead">
-      <a class="btn btn-secondary btn-lg" href="#" role="button" @click.prevent="getResult">Submit</a>
-    </p>
+    <div id="card">
+      <h1 class="display-5" v-if="flag === true">{{userCard1}}</h1>
+      <h1 class="display-5" v-if="flag === true">{{userCard2}}</h1>
+    </div>
+    <!-- <p class="lead">
+      <a class="btn btn-secondary btn-lg" href="#" role="button" @click.prevent="getResult">Play</a>
+    </p> -->
   </div>
 </template>
 
@@ -18,8 +21,7 @@ export default {
   name: 'Cards',
   data () {
     return {
-      matchCard: 0,
-      cardPoint: ''
+      flag: false
     }
   },
   methods: {
@@ -29,57 +31,86 @@ export default {
       
     },
     getResult () {
+      if (this.userCard1 && this.userCard2) {
+        this.flag = true
+      } 
       if (this.userCard1 === 'Rock' && this.userCard2 === 'Shears') {
         // this.userScore1 += 1
         this.$store.commit('SET_USERSCORE1', true)
-        this.$store.commit('REMOVE_USER1')
-        this.$store.commit('REMOVE_USER2')
-
-        this.$store.commit('REMOVE_CARD1')
-        this.$store.commit('REMOVE_CARD2')
+        setTimeout(() => {
+          this.$store.commit('REMOVE_USER1')
+          this.$store.commit('REMOVE_USER2')
+  
+          this.$store.commit('REMOVE_CARD1')
+          this.$store.commit('REMOVE_CARD2')
+          this.flag = false
+        }, 1500)
       } else if (this.userCard1 === 'Rock' && this.userCard2 === 'Paper') {
         // this.userScore2 += 1
         this.$store.commit('SET_USERSCORE2', true)
-        this.$store.commit('REMOVE_USER1')
-        this.$store.commit('REMOVE_USER2')
-
-        this.$store.commit('REMOVE_CARD1')
-        this.$store.commit('REMOVE_CARD2')
+        setTimeout(() => {
+          this.$store.commit('REMOVE_USER1')
+          this.$store.commit('REMOVE_USER2')
+  
+          this.$store.commit('REMOVE_CARD1')
+          this.$store.commit('REMOVE_CARD2')
+          this.flag = false
+        }, 1500)
       } else if (this.userCard1 === 'Shears' && this.userCard2 === 'Paper') {
         // this.userScore1 += 1
         this.$store.commit('SET_USERSCORE1', true)
+        setTimeout(() => {
+          this.$store.commit('REMOVE_USER1')
+          this.$store.commit('REMOVE_USER2')
+  
+          this.$store.commit('REMOVE_CARD1')
+          this.$store.commit('REMOVE_CARD2')
+          this.flag = false
+        }, 1500)
       } else if (this.userCard2 === 'Rock' && this.userCard1 === 'Shears') {
         // this.userScore2 += 1
         this.$store.commit('SET_USERSCORE2', true)
-        this.$store.commit('REMOVE_USER1')
-        this.$store.commit('REMOVE_USER2')
-
-        this.$store.commit('REMOVE_CARD1')
-        this.$store.commit('REMOVE_CARD2')
+        setTimeout(() => {
+          this.$store.commit('REMOVE_USER1')
+          this.$store.commit('REMOVE_USER2')
+  
+          this.$store.commit('REMOVE_CARD1')
+          this.$store.commit('REMOVE_CARD2')
+          this.flag = false
+        }, 1500)
       } else if (this.userCard2 === 'Rock' && this.userCard1 === 'Paper') {
         // this.userScore1 += 1
         this.$store.commit('SET_USERSCORE1', true)
-        this.$store.commit('REMOVE_USER1')
-        this.$store.commit('REMOVE_USER2')
-
-        this.$store.commit('REMOVE_CARD1')
-        this.$store.commit('REMOVE_CARD2')
+        setTimeout(() => {
+          this.$store.commit('REMOVE_USER1')
+          this.$store.commit('REMOVE_USER2')
+  
+          this.$store.commit('REMOVE_CARD1')
+          this.$store.commit('REMOVE_CARD2')
+          this.flag = false
+        }, 1500)
       } else if (this.userCard2 === 'Shears' && this.userCard1 === 'Paper') {
         // this.userScore2 += 1
         this.$store.commit('SET_USERSCORE2', true)
-        this.$store.commit('REMOVE_USER1')
-        this.$store.commit('REMOVE_USER2')
-
-        this.$store.commit('REMOVE_CARD1')
-        this.$store.commit('REMOVE_CARD2')
+        setTimeout(() => {
+          this.$store.commit('REMOVE_USER1')
+          this.$store.commit('REMOVE_USER2')
+  
+          this.$store.commit('REMOVE_CARD1')
+          this.$store.commit('REMOVE_CARD2')
+          this.flag = false
+        }, 1500)
+      } else if (this.userCard2 === 'Rock' && this.userCard1 === 'Rock' || this.userCard2 === 'Shears' && this.userCard1 === 'Shears' || this.userCard2 === 'Paper' && this.userCard1 === 'Paper') {
+        // this.userScore2 += 1
+        setTimeout(() => {
+          this.$store.commit('REMOVE_USER1')
+          this.$store.commit('REMOVE_USER2')
+  
+          this.$store.commit('REMOVE_CARD1')
+          this.$store.commit('REMOVE_CARD2')
+          this.flag = false
+        }, 1500)
       }
-      // this.$store.commit('REMOVE_USER1')
-      // this.$store.commit('REMOVE_USER2')
-
-      // this.$store.commit('REMOVE_CARD1')
-      // this.$store.commit('REMOVE_CARD2')
-
-      // console.log(this.userScore1, 'ini player 1');
     }
   },
   computed: {
@@ -138,5 +169,11 @@ export default {
   }
   .match-img:hover{
     transform: scale(1.5);
+  }
+  #card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px 0;
   }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="billboard">
-    <h1 class="display-5">time left : {{startValue}} s</h1>
-    <div id="score">
-      <h1 class="display-5">Your score : {{userScore1}}</h1>
-      <h1 class="display-5">Enemy score : {{userScore2}}</h1>
-    </div>
+    <!-- <h1 class="display-5">time left : {{startValue}} s</h1> -->
+    <!-- <div id="score">
+    </div> -->
+      <h1 class="display-5">Player A score : {{userScore1}}</h1>
+      <h1 class="display-5">Player B score : {{userScore2}}</h1>
   </div>
 </template>
 
