@@ -17,6 +17,21 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/matchmaking',
+    name : 'Matchmaking',
+    component: () => import('../views/Matchmaking.vue')
+  },
+  {
+    path: '/loading',
+    name : 'Loading',
+    component: () => import('../views/Loading.vue')
+  },
+  {
+    path: '/match',
+    name : 'InMatch',
+    component: () => import('../views/Matchmaking.vue')
   }
 ]
 
@@ -25,5 +40,10 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== 'Login' && !localStorage.access_token) next({ name: 'Login' })
+//   else next()
+// })
 
 export default router

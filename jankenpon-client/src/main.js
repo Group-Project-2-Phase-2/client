@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import Swal from 'sweetalert2'
-import 'bootstrap/dist/css/bootstrap.css'
+// import Swal from 'sweetalert2'
+import '../src/bootstrap.min.css'
 
 Vue.config.productionTip = false
 
