@@ -8,11 +8,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    score: 0
+    score: 0,
+    userCard1: '',
+    userCard2: ''
   },
   mutations: {
     SET_SCORE (state) {
       state.score++
+    },
+    SET_CARD (state, payload) {
+      state.userCard1 = payload
     }
   },
   actions: {

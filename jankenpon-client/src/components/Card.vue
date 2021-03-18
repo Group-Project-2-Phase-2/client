@@ -4,7 +4,7 @@
     <img src="../assets/gunting.png" alt="shears-picture" class="match-img" @click.prevent="changeCard('Shears')">
     <img src="../assets/kertas.png" alt="paper-picture" class="match-img" @click.prevent="changeCard('Paper')">
     <hr class="my-4">
-    <h1 class="display-5">{{this.cardName}}</h1>
+    <h1 class="display-5">{{userCard1}}</h1>
     <p class="lead">
       <a class="btn btn-secondary btn-lg" href="#" role="button" @click.prevent="getResult">Submit</a>
     </p>
@@ -12,18 +12,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
   name: 'Cards',
   data () {
     return {
-      cardName: 'Your card',
       matchCard: 0
     }
   },
   methods: {
     changeCard (card) {
-      this.cardName = card
+      this.$store.commit('SET_CARD', card)
+      this.$socket.emit('sendCard', this.userCard1)
     },
     getResult () {
       // if (this.cardName === 'Rock' && this.cardName === 'Shears') {
@@ -36,6 +37,14 @@ export default {
       //   this.matchCard += 1
       // }
       this.$store.commit('SET_SCORE')
+    }
+  },
+  computed: {
+    ...mapState(['userCard1'])
+  },
+  sockets: {
+    sendAll (card) {
+      console.log(card, 'DARI CARD DOT VUE');
     }
   }
 }
