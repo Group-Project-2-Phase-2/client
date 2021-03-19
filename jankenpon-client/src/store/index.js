@@ -12,8 +12,8 @@ export default new Vuex.Store({
     userScore2: 0,
     userCard1: '',
     userCard2: '',
-    user1: {id: '', room: ''},
-    user2: {id: '', room: ''}
+    user1: {id: '', username: '', room: ''},
+    user2: {id: '', username: '', room: ''}
   },
   mutations: {
     SET_USERSCORE1 (state, payload) {
@@ -25,6 +25,12 @@ export default new Vuex.Store({
       if (payload) {
         state.userScore2++
       }
+    },
+    REMOVE_USERSCORE1 (state) {
+      state.userScore1 = 0
+    },
+    REMOVE_USERSCORE2 (state) {
+      state.userScore2 = 0
     },
     SET_CARD1 (state, payload) {
       state.userCard1 = payload.card
@@ -39,13 +45,15 @@ export default new Vuex.Store({
       state.userCard2 = ''
     },
     SET_USER1 (state, payload) {
-      let { id, room } = payload
+      let { id, room, username } = payload
       state.user1.id = id
+      state.user1.username = username
       state.user1.room = room
     },
     SET_USER2 (state, payload) {
-      let { id, room } = payload
+      let { id, room, username } = payload
       state.user2.id = id
+      state.user2.username = username
       state.user2.room = room
     },
     REMOVE_USER1 (state) {

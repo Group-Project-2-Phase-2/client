@@ -111,6 +111,27 @@ export default {
           this.flag = false
         }, 1500)
       }
+      if (+this.userScore1 == 3 || +this.userScore2 == 3) {
+        if (+this.userScore1 > +this.userScore2) {
+          this.$swal({
+          title: "Congratulation!",
+          text: `${this.user2.username} win`,
+          icon: "success",
+          button: "Play Again?",
+        })
+        this.$store.commit('REMOVE_USERSCORE1')
+        this.$store.commit('REMOVE_USERSCORE2')
+        } else if (+this.userScore1 < +this.userScore2) {
+          this.$swal({
+          title: "Congratulation!",
+          text: `${this.user2.username} win`,
+          icon: "success",
+          button: "Play Again?",
+        })
+        this.$store.commit('REMOVE_USERSCORE1')
+        this.$store.commit('REMOVE_USERSCORE2')
+        }
+      }
     }
   },
   computed: {

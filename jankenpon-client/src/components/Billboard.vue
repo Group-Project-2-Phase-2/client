@@ -3,8 +3,8 @@
     <!-- <h1 class="display-5">time left : {{startValue}} s</h1> -->
     <!-- <div id="score">
     </div> -->
-      <h1 class="display-5">Player A score : {{userScore1}}</h1>
-      <h1 class="display-5">Player B score : {{userScore2}}</h1>
+      <h1 class="display-5">{{user1.username}} score : {{userScore1}}</h1>
+      <h1 class="display-5">{{user2.username}} score : {{userScore2}}</h1>
   </div>
 </template>
 
@@ -33,7 +33,9 @@ export default {
   },
   computed: {
     ...mapState(['userScore1']),
-    ...mapState(['userScore2'])
+    ...mapState(['userScore2']),
+    ...mapState(['user1']),
+    ...mapState(['user2'])
   }
 }
 </script>
