@@ -1,19 +1,28 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/match">InMatch</router-link>
-    </div> -->
     <router-view/>
   </div>
 </template>
 
 <style>
-body{
+body {
+  position: relative;
   background-image: url('https://image.freepik.com/free-vector/seamless-pattern-petals-gray-background_53876-61842.jpg');
 }
 
+body:before {
+  background-repeat:repeat-y;
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-position: 100% 0;
+  background-size: cover;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -34,4 +43,26 @@ body{
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+body {
+  position: relative;
+}
+
+body:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-image: url('https://image.freepik.com/free-vector/seamless-pattern-petals-gray-background_53876-61842.jpg');
+  background-position: 100% 0;
+  background-size: cover;
+}
+
+/* body {
+  background-image: url('https://image.freepik.com/free-vector/seamless-pattern-petals-gray-background_53876-61842.jpg');
+} */
 </style>

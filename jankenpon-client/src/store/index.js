@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import axios from '../axios/axios'
-// import router from '@/router/index.js'
-// import Swal from 'sweetalert2'
-
+import axios from '../axios/axios'
+import router from '../router'
+import Swal from 'sweetalert2'
+const baseURL = 'http://localhost:3000/'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -66,6 +66,56 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    login (context, payload) {
+      axios
+        .post('/login', payload)
+        .then(response => {
+          console.log(response.data.data)
+          localStorage.access_token = response.data.data.access_token
+          localStorage.username = response.data.data.username
+          localStorage.id = response.data.data.id
+          router.push('/')
+        })
+        .catch(err => {
+          console.log(err)
+          Swal.fire(
+            'Oops!',
+            'Invalid email/password',
+            'error'
+          )
+        })
+    },
+    register (context, payload) {
+      axios
+        .post('/register', payload)
+        .then(() => {
+          console.log(payload)
+          context.dispatch('login', payload)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      },
+    fetchEnemy (context, payload) {
+      axios({
+        method : 'post',
+        url : baseURL + 'matchmake',
+        headers : {
+          access_token : localStorage.access_token
+        }
+      })
+      .then(({data}) => {
+        console.log(data, "<<<<<< data", payload, "<<<<< payload");
+        console.log("sukses");
+        router.push('match')
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(err);
+        router.push('match')
+      })
+
+    }
   },
   modules: {
   }
