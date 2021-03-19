@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from '../axios/axios'
 import router from '../router'
 import Swal from 'sweetalert2'
-const baseURL = 'http://localhost:3000/'
+const baseURL = 'https://guarded-garden-08318.herokuapp.com/'
 Vue.use(Vuex)
 
 export default new Vuex.Store({

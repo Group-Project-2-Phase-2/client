@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000'
+  connection: 'https://guarded-garden-08318.herokuapp.com'
 }))
 
 new Vue({
