@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import axios from '../axios/axios'
+import axios from '../axios/axios'
+import router from '../router'
 // import router from '@/router/index.js'
 // import Swal from 'sweetalert2'
-
+const baseURL = 'http://localhost:3000/'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -66,6 +67,25 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    fetchEnemy (context, payload) {
+      axios({
+        method : 'post',
+        url : baseURL + 'matchmake',
+        headers : {
+          access_token : localStorage.access_token
+        }
+      })
+      .then(({data}) => {
+        console.log(data, "<<<<<< data", payload, "<<<<< payload");
+        console.log("sukses");
+        router.push('match')
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(err);
+        router.push('match')
+      })
+    }
   },
   modules: {
   }

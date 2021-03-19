@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     chooseCard (card) {
+      console.log(card);
       this.cardPoint = card
       this.$socket.emit('sendCard', {cardFromVue: this.cardPoint, access_token: localStorage.access_token, room: localStorage.room})
       

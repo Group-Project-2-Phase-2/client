@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 // import Swal from 'sweetalert2'
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
 import VueSocketIO from 'vue-socket.io'
 
 import VueSweetalert2 from 'vue-sweetalert2';
