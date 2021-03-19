@@ -94,8 +94,19 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          Swal.fire({
+            title: 'Oops!',
+            text: 'An account exists under the entered username. Would you like to log in?',
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonText: `Log in`
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push('login')
+            }
+          })
         })
-
+    },
     fetchEnemy (context, payload) {
       axios({
         method : 'post',
