@@ -19,6 +19,25 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import('../views/Register.vue')
+  },
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue')
+  },
+  {
+    path: '/matchmaking',
+    name : 'Matchmaking',
+    component: () => import('../views/Matchmaking.vue')
+  },
+  {
+    path: '/loading',
+    name : 'Loading',
+    component: () => import('../views/Loading.vue')
+  },
+  {
+    path: '/match',
+    name: 'InMatch',
+    component: () => import('../views/InMatch.vue')
   }
 ]
 
