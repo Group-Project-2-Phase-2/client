@@ -30,8 +30,8 @@ const routes = [
   },
   {
     path: '/match',
-    name : 'InMatch',
-    component: () => import('../views/Matchmaking.vue')
+    name: 'InMatch',
+    component: () => import(/* webpackChunkName: "inMatch" */ '../views/InMatch.vue')
   }
 ]
 
@@ -41,9 +41,9 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.name !== 'Login' && !localStorage.access_token) next({ name: 'Login' })
-//   else next()
-// })
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !localStorage.access_token) next({ name: 'Login' })
+  else next()
+})
 
 export default router
