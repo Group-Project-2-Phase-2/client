@@ -27,6 +27,7 @@ export default {
   methods: {
     chooseCard (card) {
       this.cardPoint = card
+      console.log(card, 'INI CARD =====++++==+++===++++')
       this.$socket.emit('sendCard', {cardFromVue: this.cardPoint, access_token: localStorage.access_token, room: localStorage.room})
       
     },
@@ -114,19 +115,19 @@ export default {
       if (+this.userScore1 == 3 || +this.userScore2 == 3) {
         if (+this.userScore1 > +this.userScore2) {
           this.$swal({
-          title: "Congratulation!",
-          text: `${this.user2.username} win`,
+          title: `${this.user1.username} win`,
+          text: `${this.userScore1} vs ${this.userScore2}`,
           icon: "success",
-          button: "Play Again?",
+          button: "OK",
         })
         this.$store.commit('REMOVE_USERSCORE1')
         this.$store.commit('REMOVE_USERSCORE2')
         } else if (+this.userScore1 < +this.userScore2) {
           this.$swal({
-          title: "Congratulation!",
-          text: `${this.user2.username} win`,
+          title: `${this.user2.username} win`,
+          text: `${this.userScore2} vs ${this.userScore1}`,
           icon: "success",
-          button: "Play Again?",
+          button: "OK",
         })
         this.$store.commit('REMOVE_USERSCORE1')
         this.$store.commit('REMOVE_USERSCORE2')
@@ -161,12 +162,6 @@ export default {
         this.$store.commit('SET_USER1', data)
         this.$store.commit('SET_CARD1', data)
       }
-      // HAPUSSSSS SEMUAAAA =============++++++=++++++==++++++==+++++
-      // this.$store.commit('REMOVE_USER1')
-      // this.$store.commit('REMOVE_USER2')
-
-      // this.$store.commit('REMOVE_CARD1')
-      // this.$store.commit('REMOVE_CARD2')
 
       if (this.user1.room && this.user2.room && this.user1.room == this.user2.room) {
           console.log('ABIS INI BANDINGKAN DAN TENTUKAN YG MENANG');
