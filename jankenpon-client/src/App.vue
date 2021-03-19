@@ -1,14 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/match">InMatch</router-link>
+    </div> -->
     <router-view/>
   </div>
 </template>
 
 <style>
+body{
+  background-image: url('https://image.freepik.com/free-vector/seamless-pattern-petals-gray-background_53876-61842.jpg');
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
