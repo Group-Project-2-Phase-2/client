@@ -15,7 +15,6 @@ export default new Vuex.Store({
   },
   actions: {
     fetchEnemy (context, payload) {
-      console.log(localStorage.access_token, "<<<<<<<<<<<<<<")
       axios({
         method : 'post',
         url : baseURL + 'matchmake',
@@ -25,6 +24,7 @@ export default new Vuex.Store({
       })
       .then(({data}) => {
         console.log(data, payload);
+        console.log("sukses");
         router.push('match')
       })
       .catch(err => {
