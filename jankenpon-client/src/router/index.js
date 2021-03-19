@@ -44,6 +44,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && to.name !== 'Register'  && !localStorage.access_token) next({ name: 'Login' })
+  else if (to.name === 'InMatch' && !localStorage.access_token) next({ name: 'Matchmaking' }) 
   else next()
 })
 

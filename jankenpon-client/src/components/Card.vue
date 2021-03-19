@@ -8,14 +8,15 @@
       <h1 class="display-5" v-if="flag === true">{{userCard1}}</h1>
       <h1 class="display-5" v-if="flag === true">{{userCard2}}</h1>
     </div>
-    <!-- <p class="lead">
-      <a class="btn btn-secondary btn-lg" href="#" role="button" @click.prevent="getResult">Play</a>
-    </p> -->
+    <p class="lead">
+      <a class="btn btn-secondary btn-lg" href="#" role="button" @click.prevent="outRoom">Out Room</a>
+    </p>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import router from '../router'
 
 export default {
   name: 'Cards',
@@ -25,16 +26,25 @@ export default {
     }
   },
   methods: {
+    outRoom () {
+      this.$store.dispatch('deleteRoom', this.room)
+      
+      this.$store.commit('REMOVE_USER1')
+      this.$store.commit('REMOVE_USER2')
+
+      this.$store.commit('REMOVE_CARD1')
+      this.$store.commit('REMOVE_CARD2')
+    },
     chooseCard (card) {
-      console.log(card, 'input');
+      console.log(this.room, 'dari card.vue line 33');
       this.cardPoint = card
       this.$socket.emit('sendCard', {cardFromVue: this.cardPoint, access_token: localStorage.access_token, room: localStorage.room})
-      
+      // console.log(this.room, 'INI ROOMMMMMM BY CARD')
     },
     getResult () {
       if (this.userCard1 && this.userCard2) {
         this.flag = true
-      } 
+      }
       if (this.userCard1 === 'Rock' && this.userCard2 === 'Shears') {
         // this.userScore1 += 1
         this.$store.commit('SET_USERSCORE1', true)
@@ -115,19 +125,19 @@ export default {
       if (+this.userScore1 == 3 || +this.userScore2 == 3) {
         if (+this.userScore1 > +this.userScore2) {
           this.$swal({
-          title: "Congratulation!",
-          text: `${this.user2.username} win`,
+          title: `${this.user1.username} win`,
+          text: `${this.userScore1} vs ${this.userScore2}`,
           icon: "success",
-          button: "Play Again?",
+          button: "OK",
         })
         this.$store.commit('REMOVE_USERSCORE1')
         this.$store.commit('REMOVE_USERSCORE2')
         } else if (+this.userScore1 < +this.userScore2) {
           this.$swal({
-          title: "Congratulation!",
-          text: `${this.user2.username} win`,
+          title: `${this.user2.username} win`,
+          text: `${this.userScore2} vs ${this.userScore1}`,
           icon: "success",
-          button: "Play Again?",
+          button: "OK",
         })
         this.$store.commit('REMOVE_USERSCORE1')
         this.$store.commit('REMOVE_USERSCORE2')
@@ -141,7 +151,8 @@ export default {
     ...mapState(['userCard1']),
     ...mapState(['userCard2']),
     ...mapState(['userScore1']),
-    ...mapState(['userScore2'])
+    ...mapState(['userScore2']),
+    ...mapState(['room'])
   },
   sockets: {
     sendAll (data) {
@@ -162,24 +173,23 @@ export default {
         this.$store.commit('SET_USER1', data)
         this.$store.commit('SET_CARD1', data)
       }
-      // HAPUSSSSS SEMUAAAA =============++++++=++++++==++++++==+++++
-      // this.$store.commit('REMOVE_USER1')
-      // this.$store.commit('REMOVE_USER2')
 
-      // this.$store.commit('REMOVE_CARD1')
-      // this.$store.commit('REMOVE_CARD2')
-
-      if (this.user1.room && this.user2.room && this.user1.room == this.user2.room) {
+      if (this.room) {
           console.log('ABIS INI BANDINGKAN DAN TENTUKAN YG MENANG');
           this.getResult()
-      } else if (this.user1.room && this.user2.room && this.user1.room != this.user2.room) {
+      } else {
         this.$store.commit('REMOVE_USER1')
         this.$store.commit('REMOVE_USER2')
+        this.$store.commit('REMOVE_CARD1')
+        this.$store.commit('REMOVE_CARD2')
+        router.push('/loading')
+
       }
       
       console.log(this.user1.id, this.userCard1, 'DARI CARD DOT VUE1')
       console.log(this.user2.id, this.userCard2, 'DARI CARD DOT VUE2')
-    }
+    },
+    
   }
 }
 </script>

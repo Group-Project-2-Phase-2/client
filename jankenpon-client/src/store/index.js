@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from '../axios/axios'
 import router from '../router'
 import Swal from 'sweetalert2'
-const baseURL = 'https://guarded-garden-08318.herokuapp.com/'
+const baseURL = 'https://guarded-garden-08318.herokuapp.com'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,7 +13,8 @@ export default new Vuex.Store({
     userCard1: '',
     userCard2: '',
     user1: {id: '', username: '', room: ''},
-    user2: {id: '', username: '', room: ''}
+    user2: {id: '', username: '', room: ''},
+    room: { id: 0, players: [] }
   },
   mutations: {
     SET_USERSCORE1 (state, payload) {
@@ -63,6 +64,15 @@ export default new Vuex.Store({
     REMOVE_USER2 (state) {
       state.user2.id = ''
       state.user2.room = ''
+    },
+    SET_ROOM (state, payload) {
+      // console.log(payload);
+      if (typeof payload === 'object') {
+        state.room.id = +payload.room
+        state.room.players.push(+payload.UserIdB)
+      } else {
+        state.room.players.push(+payload)
+      }
     }
   },
   actions: {
@@ -74,6 +84,10 @@ export default new Vuex.Store({
           localStorage.access_token = response.data.data.access_token
           localStorage.username = response.data.data.username
           localStorage.id = response.data.data.id
+
+          // SET ROOM
+          context.commit('SET_ROOM', response.data.data.id)
+
           router.push('/')
         })
         .catch(err => {
@@ -110,7 +124,7 @@ export default new Vuex.Store({
     fetchEnemy (context, payload) {
       axios({
         method : 'post',
-        url : baseURL + 'matchmake',
+        url : baseURL + '/matchmake',
         headers : {
           access_token : localStorage.access_token
         }
@@ -118,14 +132,36 @@ export default new Vuex.Store({
       .then(({data}) => {
         console.log(data, "<<<<<< data", payload, "<<<<< payload");
         console.log("sukses");
-        router.push('match')
+        
+        // SET ROOM
+        context.commit('SET_ROOM', { room: data.id, UserIdB: data.UserIdB })
+
+        if (data.UserIdB) {
+          router.push('match')
+        }
       })
       .catch(err => {
         console.log("error");
         console.log(err);
         router.push('match')
       })
+    },
+    deleteRoom (context, payload) {
+      let idRoom = payload.id
+      
+      axios({
+        url: baseURL + `/${idRoom}`,
+        method: 'DELETE',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      }).then(data => {
+        console.log(data);
 
+        router.push('/')
+      }).catch(err => {
+        console.log(err);
+      })
     }
   },
   modules: {

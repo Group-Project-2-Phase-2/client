@@ -17,6 +17,16 @@ export default {
   components: {
     Billboard,
     Cards
+  },
+  computed: {
+    getUser () {
+      // let getUser1 = this.$store.state.user1
+      // let getUser2 = this.$store.state.user2
+      // if (!getUser1 || !getUser2) {
+      //   this.$router.push('Matchmaking')
+      // }
+      return console.log('keluar room')
+    }
   }
 }
 </script>
