@@ -7,9 +7,11 @@
         </div>
       </div>
       <h2 style="margin-top:15px">The online multiplayer rock, paper, scissors game</h2><br>
+      <!-- <button type="button" @click.prevent="clg()">Hello</button>
+      <a href="/login">Halo</a> -->
       <div class="text-center">
         <button id="btn1" type="button" class="btn btn-primary btn-lg text-center" @click.prevent="startGame()">Let's Play!</button>
-        <button id="btn2" type="button" class="btn btn-primary btn-lg text-center" @click.prevent="logout()">Log Out</button>
+        <router-link to="/"><button id="btn2" type="button" class="btn btn-primary btn-lg text-center" @click.prevent="logout()">Log Out</button></router-link>
       </div>   
     </div>
   </div>
@@ -18,11 +20,14 @@
 <script>
 export default {
   methods : {
+    clg () {
+      console.log('hello')
+    },
     created () {
     },
     startGame () {
       console.log("start game")
-      this.$router.push('loading')
+      this.$router.push('/loading')
     },
     logout () {
       console.log("log out");

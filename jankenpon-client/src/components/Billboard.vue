@@ -3,8 +3,8 @@
     <!-- <h1 class="display-5">time left : {{startValue}} s</h1> -->
     <!-- <div id="score">
     </div> -->
-      <h1 class="display-5">{{user1.username}} score : {{userScore1}}</h1>
-      <h1 class="display-5">{{user2.username}} score : {{userScore2}}</h1>
+      <h1 class="display-5">{{user1.username}} <br> {{userScore1}}</h1>
+      <h1 class="display-5">{{user2.username}} <br> {{userScore2}}</h1>
   </div>
 </template>
 

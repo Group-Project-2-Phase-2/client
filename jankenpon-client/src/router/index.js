@@ -1,15 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
   {
     path: '/login',
     name: 'Login',
@@ -26,7 +20,7 @@ const routes = [
   //   component: () => import('../views/About.vue')
   // },
   {
-    path: '/matchmaking',
+    path: '/',
     name : 'Matchmaking',
     component: () => import('../views/Matchmaking.vue')
   },
@@ -50,6 +44,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && to.name !== 'Register'  && !localStorage.access_token) next({ name: 'Login' })
+  else if (to.name === 'InMatch' && !localStorage.access_token) next({ name: 'Matchmaking' }) 
   else next()
 })
 
