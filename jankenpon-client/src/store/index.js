@@ -76,7 +76,7 @@ export default new Vuex.Store({
         }
       })
       .then(({data}) => {
-        console.log(data, payload);
+        console.log(data, "<<<<<< data", payload, "<<<<< payload");
         console.log("sukses");
         router.push('match')
       })
