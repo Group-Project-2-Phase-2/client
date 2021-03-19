@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../axios/axios'
 import router from '../router'
-// import router from '@/router/index.js'
-// import Swal from 'sweetalert2'
+import Swal from 'sweetalert2'
 const baseURL = 'http://localhost:3000/'
 Vue.use(Vuex)
 
