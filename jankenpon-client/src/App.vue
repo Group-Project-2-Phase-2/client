@@ -43,4 +43,26 @@ body:before {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+body {
+  position: relative;
+}
+
+body:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-image: url('https://image.freepik.com/free-vector/seamless-pattern-petals-gray-background_53876-61842.jpg');
+  background-position: 100% 0;
+  background-size: cover;
+}
+
+/* body {
+  background-image: url('https://image.freepik.com/free-vector/seamless-pattern-petals-gray-background_53876-61842.jpg');
+} */
 </style>

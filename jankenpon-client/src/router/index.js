@@ -11,9 +11,18 @@ const routes = [
     component: Home
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue')
+  },
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/About.vue')
   },
   {
     path: '/matchmaking',
@@ -28,7 +37,7 @@ const routes = [
   {
     path: '/match',
     name: 'InMatch',
-    component: () => import(/* webpackChunkName: "inMatch" */ '../views/InMatch.vue')
+    component: () => import('../views/InMatch.vue')
   }
 ]
 
@@ -39,7 +48,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !localStorage.access_token) next({ name: 'Login' })
+  if (to.name !== 'Login' && to.name !== 'Register'  && !localStorage.access_token) next({ name: 'Login' })
   else next()
 })
 
